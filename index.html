@@ -109,7 +109,8 @@
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-            gap: 16px;
+            gap: 20px;
+            margin-bottom: 20px;
         }
 
         .card {
@@ -147,12 +148,8 @@
         .formula-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height .25s ease;
+            transition: max-height 0.3s ease;
         }
-
-            .formula-content.open {
-                max-height: 500px;
-            }
 
         .formula-inner {
             padding: 12px;
@@ -924,7 +921,19 @@
 
         function toggleFormula(el) {
             const content = el.nextElementSibling;
-            content.classList.toggle('open');
+
+            if (content.classList.contains("open")) {
+                content.style.maxHeight = content.scrollHeight + "px";
+
+                requestAnimationFrame(() => {
+                    content.style.maxHeight = "0px";
+                });
+
+                content.classList.remove("open");
+            } else {
+                content.classList.add("open");
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
         }
 
         function revealAnswer(btn) {
