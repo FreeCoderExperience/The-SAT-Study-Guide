@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The SAT Study Guide</title>
-
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet"/>
     <link rel="icon" type="image/x-icon" href="icon.ico">
 
     <style>
@@ -45,6 +45,18 @@
 
         /* TOGGLE BUTTON */
         /* FLOATING CALCULATOR BUTTON */
+.chevron {
+    display: inline-block;
+    transition: transform 0.25s ease;
+    transform-origin: center;
+    line-height: 1;
+    height: 16px;
+}
+
+.formula-header.active .chevron {
+    transform: rotate(180deg);
+}
+
         .calc-toggle {
             position: fixed;
             bottom: 20px;
@@ -57,6 +69,11 @@
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
+
+
+.calc-toggle i {
+    font-size: 1rem;
+}
 
             .calc-toggle:hover {
                 background: #f5f5f5;
@@ -71,12 +88,17 @@
             padding: 20px;
         }
 
+	.example {
+    	    position: relative;
+	}
+
         .cat-btn {
             border: 1px solid var(--border);
             background: #fff;
             padding: 8px 14px;
             border-radius: 999px;
             cursor: pointer;
+	    font-size: 16px;
         }
 
             .cat-btn.active {
@@ -121,7 +143,8 @@
         }
 
             .card h2 {
-                margin-bottom: 10px;
+                margin-bottom: 20px;
+    line-height: 0.7;
             }
 
         /* FORMULAS */
@@ -139,6 +162,7 @@
             justify-content: space-between;
             cursor: pointer;
             font-family: monospace;
+	    align-items: center;
         }
 
             .formula-header:hover {
@@ -191,11 +215,10 @@
         }
 
         .answer {
+	    position: absolute;
+    	    bottom: 0px;
+    	    right: 0px;
             display: none;
-            margin-top: 10px;
-            padding: 10px;
-            background: white;
-            border-radius: 6px;
         }
 
         .calc-panel {
@@ -257,17 +280,37 @@
         <h1>The SAT Study Guide</h1>
         <p>Focused math formulas — Organized by topic — Love from FreeCoderExperience</p>
         <p>SAT® is a trademark registered and owned by the College Board®, which is not affiliated with and does not endorse this product or site.</p>
-        <button class="calc-toggle" onclick="toggleCalc()">
-            Enable Calculator
-        </button>
+<button class="calc-toggle" onclick="toggleCalc()">
+    <i class="ri-calculator-line"></i>
+    <span>Enable Calculator</span>
+</button>
     </header>
 
     <div class="categories">
-        <button class="cat-btn active" onclick="filterCat('all',this)">All</button>
-        <button class="cat-btn" onclick="filterCat('algebra',this)">Algebra</button>
-        <button class="cat-btn" onclick="filterCat('geometry',this)">Geometry</button>
-        <button class="cat-btn" onclick="filterCat('trig',this)">Trigonometry</button>
-        <button class="cat-btn" onclick="filterCat('stats',this)">Statistics</button>
+<button class="cat-btn active" onclick="filterCat('all',this)">
+    <i class="ri-apps-line"></i>
+    <span>All</span>
+</button>
+
+<button class="cat-btn" onclick="filterCat('algebra',this)">
+    <i class="ri-function-line"></i>
+    <span>Algebra</span>
+</button>
+
+<button class="cat-btn" onclick="filterCat('geometry',this)">
+    <i class="ri-ruler-line"></i>
+    <span>Geometry</span>
+</button>
+
+<button class="cat-btn" onclick="filterCat('trig',this)">
+    <i class="ri-compass-3-line"></i>
+    <span>Trigonometry</span>
+</button>
+
+<button class="cat-btn" onclick="filterCat('stats',this)">
+    <i class="ri-bar-chart-line"></i>
+    <span>Statistics</span>
+</button>
     </div>
 
     <!-- MAIN SPLIT LAYOUT -->
@@ -290,7 +333,7 @@
 
                         <div class="formula-header" onclick="toggleFormula(this)">
 
-                            <span>y = mx + b</span><span class="chevron">⌄</span>
+                            <span>y = mx + b</span><i class="ri-arrow-down-s-line chevron"></i>
 
                         </div>
 
@@ -334,7 +377,7 @@
 
                             <span>m = <span class="frac"><span class="top">y₂ - y₁</span><span class="bottom">x₂ - x₁</span></span></span>
 
-                            <span class="chevron">⌄</span>
+                            <i class="ri-arrow-down-s-line chevron"></i>
 
                         </div>
 
@@ -388,7 +431,7 @@
 
                             <span>x = <span class="frac"><span class="top">-b ± √(b² - 4ac)</span><span class="bottom">2a</span></span></span>
 
-                            <span class="chevron">⌄</span>
+                            <i class="ri-arrow-down-s-line chevron"></i>
 
                         </div>
 
@@ -430,7 +473,7 @@
 
                         <div class="formula-header" onclick="toggleFormula(this)">
 
-                            <span>b² − 4ac</span><span class="chevron">⌄</span>
+                            <span>b² − 4ac</span><i class="ri-arrow-down-s-line chevron"></i>
 
                         </div>
 
@@ -466,6 +509,28 @@
 
                     </div>
 
+    <div class="formula">
+        <div class="formula-header" onclick="toggleFormula(this)">
+            <span>Vertex: x = <span class="frac"><span class="top">-b</span><span class="bottom">2a</span></span></span>
+            <i class="ri-arrow-down-s-line chevron"></i>
+        </div>
+        <div class="formula-content">
+            <div class="formula-inner">
+                <p>Finds the x-coordinate of a parabola’s vertex.</p>
+
+                <div class="example">
+                    f(x) = x² − 4x + 3
+                    <br>
+                    <button class="reveal-btn" onclick="revealAnswer(this)">Show Answer</button>
+                    <div class="answer">
+                        <strong>Answer:</strong> x = 2, y = -1 → Vertex (2, -1)
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
                 </div>
 
 
@@ -484,7 +549,7 @@
 
                             <span>Area = <span class="frac"><span class="top">1</span><span class="bottom">2</span></span>bh</span>
 
-                            <span class="chevron">⌄</span>
+                            <i class="ri-arrow-down-s-line chevron"></i>
 
                         </div>
 
@@ -526,7 +591,7 @@
 
                         <div class="formula-header" onclick="toggleFormula(this)">
 
-                            <span>a² + b² = c²</span><span class="chevron">⌄</span>
+                            <span>a² + b² = c²</span><i class="ri-arrow-down-s-line chevron"></i>
 
                         </div>
 
@@ -578,7 +643,7 @@
 
                         <div class="formula-header" onclick="toggleFormula(this)">
 
-                            <span>Area = πr²</span><span class="chevron">⌄</span>
+                            <span>Area = πr²</span><i class="ri-arrow-down-s-line chevron"></i>
 
                         </div>
 
@@ -620,7 +685,7 @@
 
                         <div class="formula-header" onclick="toggleFormula(this)">
 
-                            <span>C = 2πr</span><span class="chevron">⌄</span>
+                            <span>C = 2πr</span><i class="ri-arrow-down-s-line chevron"></i>
 
                         </div>
 
@@ -656,6 +721,28 @@
 
                     </div>
 
+    <div class="formula">
+        <div class="formula-header" onclick="toggleFormula(this)">
+            <span>(x - h)² + (y - k)² = r²</span>
+            <i class="ri-arrow-down-s-line chevron"></i>
+        </div>
+        <div class="formula-content">
+            <div class="formula-inner">
+                <p>Standard equation of a circle.</p>
+
+                <div class="example">
+                    Center (2, -3), radius = 4
+                    <br>
+                    <button class="reveal-btn" onclick="revealAnswer(this)">Show Answer</button>
+                    <div class="answer">
+                        <strong>Answer:</strong> (x - 2)² + (y + 3)² = 16
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
                 </div>
 
 
@@ -674,7 +761,7 @@
 
                             <span>sin θ = <span class="frac"><span class="top">opp</span><span class="bottom">hyp</span></span></span>
 
-                            <span class="chevron">⌄</span>
+                            <i class="ri-arrow-down-s-line chevron"></i>
 
                         </div>
 
@@ -716,7 +803,7 @@
 
                         <div class="formula-header" onclick="toggleFormula(this)">
 
-                            <span>45-45-90 → 1:1:√2</span><span class="chevron">⌄</span>
+                            <span>45-45-90 → 1:1:√2</span><i class="ri-arrow-down-s-line chevron"></i>
 
                         </div>
 
@@ -726,13 +813,13 @@
 
 
 
-                                <p>Special right triangle.</p>
+                                <p>Find Hypotenuse</p>
 
 
 
                                 <div class="example">
 
-                                    Leg = 8
+                                    Short Leg = 8
 
 
 
@@ -752,6 +839,28 @@
 
                     </div>
 
+    <div class="formula">
+        <div class="formula-header" onclick="toggleFormula(this)">
+            <span>30-60-90 → 1:√3:2</span>
+            <i class="ri-arrow-down-s-line chevron"></i>
+        </div>
+        <div class="formula-content">
+            <div class="formula-inner">
+                <p>Find Long Leg and Hypotenuse</p>
+
+                <div class="example">
+                    Short Leg = 5
+                    <br>
+                    <button class="reveal-btn" onclick="revealAnswer(this)">Show Answer</button>
+                    <div class="answer">
+                        <strong>Answer:</strong> Long = 5√3, H = 10
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
                 </div>
 
 
@@ -770,7 +879,7 @@
 
                             <span>Mean = <span class="frac"><span class="top">sum</span><span class="bottom">count</span></span></span>
 
-                            <span class="chevron">⌄</span>
+                            <i class="ri-arrow-down-s-line chevron"></i>
 
                         </div>
 
@@ -814,7 +923,7 @@
 
                             <span>P(A) = <span class="frac"><span class="top">favorable</span><span class="bottom">total</span></span></span>
 
-                            <span class="chevron">⌄</span>
+                            <i class="ri-arrow-down-s-line chevron"></i>
 
                         </div>
 
@@ -858,7 +967,7 @@
 
                             <span>% Change = <span class="frac"><span class="top">(new - old)</span><span class="bottom">old</span></span> × 100</span>
 
-                            <span class="chevron">⌄</span>
+                            <i class="ri-arrow-down-s-line chevron"></i>
 
                         </div>
 
@@ -919,23 +1028,32 @@
             });
         }
 
-        function toggleFormula(el) {
-            const content = el.nextElementSibling;
+function toggleFormula(el) {
+    const content = el.nextElementSibling;
 
-            if (content.classList.contains("open")) {
-                content.style.maxHeight = content.scrollHeight + "px";
+    el.classList.toggle("active");
 
-                requestAnimationFrame(() => {
-                    content.style.maxHeight = "0px";
-                });
+    if (content.classList.contains("open")) {
 
-                content.classList.remove("open");
-            } else {
-                content.classList.add("open");
-                content.style.maxHeight = content.scrollHeight + "px";
-            }
-        }
+        content.style.maxHeight = content.scrollHeight + "px";
 
+        requestAnimationFrame(() => {
+            content.style.maxHeight = "0px";
+        });
+
+        content.classList.remove("open");
+
+    } else {
+
+        content.classList.add("open");
+
+        content.style.maxHeight = "0px";
+
+        requestAnimationFrame(() => {
+            content.style.maxHeight = content.scrollHeight + "px";
+        });
+    }
+}
         function revealAnswer(btn) {
             const answer = btn.nextElementSibling;
 
@@ -954,11 +1072,13 @@
 
             layout.classList.toggle("calc-active");
 
-            if (layout.classList.contains("calc-active")) {
-                btn.textContent = "Disable Calculator";
-            } else {
-                btn.textContent = "Enable Calculator";
-            }
+if (layout.classList.contains("calc-active")) {
+    btn.innerHTML =
+        '<i class="ri-close-circle-line"></i><span>Disable Calculator</span>';
+} else {
+    btn.innerHTML =
+        '<i class="ri-calculator-line"></i><span>Enable Calculator</span>';
+}
         }
     </script>
 
