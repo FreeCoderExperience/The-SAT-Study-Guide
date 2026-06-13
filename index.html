@@ -69,7 +69,7 @@
             flex-direction: column;
             text-align: center;
             gap: 20px;
-            margin-bottom: 20px;
+            margin: 20px 0px;
         }
 
         .section-item {
@@ -221,10 +221,8 @@
         }
 
         .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-            gap: 20px;
-            margin-bottom: 20px;
+            column-count: 3;
+            column-gap: 20px;
         }
 
         .card {
@@ -232,6 +230,8 @@
             border: 1px solid var(--border);
             border-radius: 14px;
             padding: 18px;
+            break-inside: avoid;
+            margin-bottom: 20px;
         }
 
             .card h2 {
