@@ -87,7 +87,7 @@
         /* HEADER */
         header {
             text-align: center;
-            padding: 60px 20px 20px;
+            padding: 40px 20px 20px;
         }
 
             header h1 {
@@ -217,11 +217,11 @@
         }
 
         .layout.calc-active .container {
-            transform: translateX(-220px);
+            transform: translateX(max(-220px, calc(-100vw + 100%)));
         }
 
         .grid {
-            column-count: 3;
+            column-width: 300px;
             column-gap: 20px;
         }
 
@@ -320,7 +320,6 @@
             height: 100vh;
             width: 420px;
             margin-right: 20px;
-            margin-top: 272px;
             transform: translateX(100%);
             opacity: 0;
             border-left: 1px solid var(--border);
@@ -334,6 +333,12 @@
                 height: 100vh;
                 border: none;
             }
+
+        @media (max-width: 457px) {
+            .calc-panel {
+                margin-top: 272px;
+            }
+        }
 
         .layout.calc-active .calc-panel {
             transform: translateX(0);
@@ -353,6 +358,13 @@
             opacity: 1;
         }
 
+        @media (max-width: 457px) {
+            .layout.calc-active .calc-panel {
+                width: 100%;
+                margin-right: 0px;
+            }
+        }
+
         /* SCROLLBAR HIDE */
         ::-webkit-scrollbar {
             width: 0;
@@ -369,6 +381,7 @@
 <body>
 
     <header>
+        <img src="bigicon.png" width="100" height="100" style="margin-bottom: 20px;"/>
         <h1>The SAT Study Guide</h1>
         <p>Focused math formulas — Organized by topic — Love from FreeCoderExperience</p>
         <p>SAT® is a trademark registered and owned by the College Board®, which is not affiliated with and does not endorse this product or site.</p>
@@ -869,13 +882,7 @@
                     <div class="formula">
 
                         <div class="formula-header" onclick="toggleFormula(this)">
-
-                            <span>
-                                d = <span class="frac">
-                                    <span class="top">√((x₂ − x₁)² + (y₂ − y₁)²)</span>
-                                    <span class="bottom">&nbsp;</span>
-                                </span>
-                            </span>
+                            <span>d = √((x₂ − x₁)² + (y₂ − y₁)²)</span>
 
                             <i class="ri-arrow-down-s-line chevron"></i>
 
@@ -1007,17 +1014,17 @@
                     <div class="formula">
 
                         <div class="formula-header" onclick="toggleFormula(this)">
-                            <span>V = <span class="frac"><span class="top">1</span><span class="bottom">3</span></span>Bh</span>
+                            <span>V = <span class="frac"><span class="top">1</span><span class="bottom">3</span></span>bh</span>
                             <i class="ri-arrow-down-s-line chevron"></i>
                         </div>
 
                         <div class="formula-content">
                             <div class="formula-inner">
 
-                                <p>Volume of a pyramid. B = area of base.</p>
+                                <p>Volume of a pyramid. b = area of base.</p>
 
                                 <div class="example">
-                                    Base area B = 18, h = 6
+                                    Base area b = 18, h = 6
                                     <br>
                                     <button class="reveal-btn" onclick="revealAnswer(this)">Show Answer</button>
                                     <div class="answer"><strong>Answer:</strong> 36</div>
@@ -1873,6 +1880,16 @@ if (layout.classList.contains("calc-active")) {
         '<i class="ri-calculator-line"></i><span>Enable Calculator</span>';
 }
         }
+
+        const el = document.querySelector('.calc-panel');
+
+        function updatePosition() {
+            const top = Math.max(0, 376 - window.scrollY);
+            el.style.top = `${top}px`;
+        }
+
+        window.addEventListener('scroll', updatePosition);
+        updatePosition();
     </script>
 
 </body>
